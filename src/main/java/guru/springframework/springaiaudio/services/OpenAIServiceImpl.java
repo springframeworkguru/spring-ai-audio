@@ -8,6 +8,7 @@ import org.springframework.ai.openai.api.OpenAiAudioApi;
 import org.springframework.ai.openai.audio.speech.SpeechPrompt;
 import org.springframework.ai.openai.audio.speech.SpeechResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by jt, Spring Framework Guru.
@@ -17,6 +18,11 @@ import org.springframework.stereotype.Service;
 public class OpenAIServiceImpl implements OpenAIService {
 
     private final OpenAiAudioSpeechClient speechClient;
+
+    @Override
+    public String getTranscript(MultipartFile file) {
+        return "";
+    }
 
     @Override
     public byte[] getSpeech(Question question) {
