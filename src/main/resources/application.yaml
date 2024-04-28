@@ -1,11 +1,6 @@
 spring:
   application:
     name: spring-ai-audio
-  servlet:
-    multipart:
-      enabled: true
-      max-file-size: 25MB
-      max-request-size: 25MB
 #Pass API key as environment variable, e.g. -DOPENAI_API_KEY=your-api-key
   ai:
     openai:
