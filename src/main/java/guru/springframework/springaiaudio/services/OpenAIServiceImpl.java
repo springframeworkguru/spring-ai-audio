@@ -27,7 +27,21 @@ public class OpenAIServiceImpl implements OpenAIService {
     @Override
     public String getTranscript(MultipartFile file) {
         OpenAiAudioTranscriptionOptions transcriptionOptions = OpenAiAudioTranscriptionOptions.builder()
-                .withResponseFormat(OpenAiAudioApi.TranscriptResponseFormat.VERBOSE_JSON)
+                .withResponseFormat(OpenAiAudioApi.TranscriptResponseFormat.SRT)
+                .withLanguage("en")
+                .withTemperature(0f)
+                .build();
+
+        AudioTranscriptionPrompt prompt = new AudioTranscriptionPrompt(file.getResource(), transcriptionOptions);
+
+        AudioTranscriptionResponse response = openAiTranscriptionClient.call(prompt);
+
+        return response.getResult().getOutput();
+    }
+
+    public String getJson(MultipartFile file) {
+        OpenAiAudioTranscriptionOptions transcriptionOptions = OpenAiAudioTranscriptionOptions.builder()
+                .withResponseFormat(OpenAiAudioApi.TranscriptResponseFormat.JSON)
                 .withLanguage("en")
                 .withTemperature(0f)
                 .build();
