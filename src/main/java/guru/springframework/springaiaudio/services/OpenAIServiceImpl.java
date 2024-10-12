@@ -2,7 +2,7 @@ package guru.springframework.springaiaudio.services;
 
 import guru.springframework.springaiaudio.model.Question;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ai.openai.OpenAiAudioSpeechClient;
+import org.springframework.ai.openai.OpenAiAudioSpeechModel;
 import org.springframework.ai.openai.OpenAiAudioSpeechOptions;
 import org.springframework.ai.openai.api.OpenAiAudioApi;
 import org.springframework.ai.openai.audio.speech.SpeechPrompt;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class OpenAIServiceImpl implements OpenAIService {
 
-    private final OpenAiAudioSpeechClient speechClient;
+    private final OpenAiAudioSpeechModel speechModel;
 
     @Override
     public byte[] getSpeech(Question question) {
@@ -30,7 +30,7 @@ public class OpenAIServiceImpl implements OpenAIService {
         SpeechPrompt speechPrompt = new SpeechPrompt(question.question(),
                 speechOptions);
 
-        SpeechResponse response = speechClient.call(speechPrompt);
+        SpeechResponse response = speechModel.call(speechPrompt);
 
         return response.getResult().getOutput();
     }
